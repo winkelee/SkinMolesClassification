@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #EFEFEF;
+  }
+
+  header {
+    background-color: #EFEFEF;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #3B413C;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .github-link {
+    text-decoration: none;
+    color: #3B413C;
+    font-weight: 500;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 50px);
+    gap: 1.5rem;
+  }
+
+  #results{
+    display: flex;
+    flex-direction: row;
+    background-color: #CDD6D0;
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    text-align: center;
+    color: #3B413C;
+  }
+
+  #textResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 2rem;
+    align-items: start;
+  }
+
+  #upperResults{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+
+  #sourceImage {
+    height: 224px;
+    width: 224px;
+    background-color: #c8d2cb;
+  }
+
+  .dropzone {
+    background-color: #CDD6D0;
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    text-align: center;
+    color: #3B413C;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .dropzone:hover {
+    background-color: #c8d2cb;
+  }
+
+  .button {
+    background-color: #454ADE;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .button:hover {
+    background-color: #3739c5;
+  }
+
+  footer {
+    background-color: #3B413C;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 1rem 2rem;
+    align-items: center;
+    color: white;
+  }

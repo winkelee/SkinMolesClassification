@@ -25,9 +25,11 @@ except Exception as e:
 
 app = FastAPI(title="Image Classifier API", version="1.0.0")
 
+allowed_origins = ["http://localhost:5500", "http://127.0.0.1:5500"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -42,7 +44,7 @@ def preprocess_image(image_bytes: bytes):
             img = img.convert('RGB')
         img = img.resize((IMG_WIDTH, IMG_HEIGHT), Image.Resampling.BILINEAR)
         img_array = tf.keras.preprocessing.image.img_to_array(img)
-        img_array = (img_array / 127.5) - 1.0
+        #img_array = (img_array / 127.5) - 1.0
         img_batch = np.expand_dims(img_array, axis=0)
         return tf.cast(img_batch, tf.float32)
 
@@ -63,6 +65,14 @@ async def predict_image(file: UploadFile = File(...)):
 
     preprocessed_image = preprocess_image(image_bytes)
 
+        # +++ DEBUG LOGGING +++
+    #print(f"Preprocessed image shape: {preprocessed_image.shape}")
+    #print(f"Preprocessed image dtype: {preprocessed_image.dtype}")
+    #print(f"Preprocessed image min value: {tf.reduce_min(preprocessed_image).numpy()}") 
+    #print(f"Preprocessed image max value: {tf.reduce_max(preprocessed_image).numpy()}") 
+    #print(f"Preprocessed image mean value: {tf.reduce_mean(preprocessed_image).numpy()}") 
+    # +++ END DEBUG LOGGING +++
+
     try:
         predictions = model.predict(preprocessed_image)
         probability = float(predictions[0][0]) # Getting the FIRST element since we only have a batch of ONE
@@ -78,6 +88,7 @@ async def predict_image(file: UploadFile = File(...)):
     else:
         predicted_class_index = 0
         confidence = 1.0 - probability
+
 
     predicted_class_name = CLASS_NAMES[predicted_class_index]
 

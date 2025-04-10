@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Skin Moles Classifier CNN</title>
+</head>
+<body>
+    <header>
+        <div class="title">Skin Moles Classifier CNN</div>
+        <a href="https://github.com/winkelee/SkinMolesClassification" target="_blank" class="github-link">GitHub</a>
+      </header>
+    
+      <div class="container">
+        <div id="results">
+            <div id="textResults">
+                <div id="upperResults">
+                    <span id="predictionClass">Model predicts: </span>
+                    <span id="predictionConfidence">With confidence: </span>
+                </div>
+              <span id="predictionJSON">View raw JSON output...</span>
+            </div>
+            <div id="sourceImage"></div>
+        </div>
+        <button class="button" id="classifyBtn">Classify another!</button>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" style="display: none;">
+      <footer>
+          <div id="pageBottom">
+              <span class="footerText">Made by github.com/winkelee.</span>
+              <span class="footerText">This is a demo and not a substitute for professional medical advice.</span>
+          </div>
+      </footer>
+</body>
+<script src="scriptresult.js"></script>
+</html>
