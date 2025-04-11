@@ -19,9 +19,20 @@ fileInput.addEventListener('change', (e) => {
     }
 });
 
-dropzone.addEventListener('drop', (e) => {
+dropzone.addEventListener('dragover', (e) => {
     e.preventDefault();
-    
+    dropzone.textContent = 'Dragging a file detected!';
+    dropzone.style.backgroundColor = '#c8d2cb';
+});
+
+dropzone.addEventListener('dragleave', () => {
+    dropzone.textContent = 'Drag or choose file here...';
+    dropzone.style.backgroundColor = '#CDD6D0'
+})
+
+dropzone.addEventListener('drop', (e) => {
+    console.log('Drop event executed.');
+    e.preventDefault();
     const files = e.dataTransfer.files;
     if(files.length > 0){
         if (files[0].type.startsWith('image/')){
