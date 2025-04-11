@@ -6,7 +6,6 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
-import os
 
 MODEL_PATH = 'D:/programming stuff/classificationBackend/savedmodel' #D:/programming stuff/classificationBackend
 IMG_HEIGHT = 224
