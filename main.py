@@ -60,7 +60,7 @@ async def predict_image(file: UploadFile = File(...)):
     if not file.content_type.startswith("image/"):
          raise HTTPException(status_code=400, detail="Invalid file type. Please upload an image.")
 
-    image_bytes = await file.read()
+    image_bytes = await file.read() 
 
     preprocessed_image = preprocess_image(image_bytes)
 

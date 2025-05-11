@@ -35,6 +35,14 @@ body {
     gap: 1.5rem;
   }
 
+  #inputZones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
   #results{
     display: flex;
     flex-direction: row;
@@ -72,12 +80,38 @@ body {
     border-radius: 8px;
     padding: 2rem 3rem;
     text-align: center;
+    width: 200px;
+    height: 170px;
     color: #3B413C;
     cursor: pointer;
     transition: background 0.3s;
   }
 
   .dropzone:hover {
+    background-color: #c8d2cb;
+  }
+
+  #camera{
+    max-height: 224px;
+    max-width: 224px;
+  }
+
+  .photozone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CDD6D0;
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    text-align: center;
+    color: #3B413C;
+    cursor: pointer;
+    max-width: 250px;
+    max-height: 250px;
+    transition: background 0.3s;
+  }
+
+  .photozone:hover {
     background-color: #c8d2cb;
   }
 

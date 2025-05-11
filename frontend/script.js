@@ -5,6 +5,10 @@ const classifyButton = document.getElementById("classifyBtn");
 
 const API_PREDICT_ENDPOINT = "http://127.0.0.1:8000/predict/"
 
+const video = document.getElementById("camera");
+let stream = null;
+let isUsingCamera = false;
+
 let selectedFile = null;
 let selectedFileBase64 = null;
 
@@ -47,12 +51,49 @@ dropzone.addEventListener('drop', (e) => {
 });
 
 classifyButton.addEventListener('click', () => {
-    if (selectedFile !== null){
+    if (isUsingCamera) {
+        captureFromCameraAndPredict();
+    } else if (selectedFile !== null){
         uploadAndPredict(selectedFile);
-    } else{
-        alert('Please select or drop an image before classifying it.')
+    } else {
+        alert('Please select or capture an image before classifying it.');
     }
 });
+
+function captureFromCameraAndPredict() {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(blob => {
+        const file = new File([blob], "captured_photo.png", { type: "image/png" });
+        selectedFile = file;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            selectedFileBase64 = e.target.result;
+            uploadAndPredict(file);
+        };
+        reader.onerror = function() {
+            alert('Something went wrong while processing webcam photo.');
+            clearSelection();
+        };
+        reader.readAsDataURL(file);
+    }, "image/png");
+}
+
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(mediaStream => {
+      stream = mediaStream;
+      video.srcObject = stream;
+      isUsingCamera = true;
+  })
+  .catch(err => {
+      console.error("Camera access error:", err);
+      alert("Unable to access the webcam. Please allow camera permissions.");
+  });
 
 
 function handleFileSelection(file){
@@ -65,7 +106,7 @@ function handleFileSelection(file){
     }
     reader.readAsDataURL(file);
     reader.onerror = function(){
-        alert('Something wnt wrong while reading file for preview');
+        alert('Something went wrong while reading file for preview');
         clearSelection();
     }
 }

@@ -6,8 +6,6 @@ const predictionJsonLabel = document.getElementById('predictionJSON');
 const sourceImageContainer = document.getElementById('sourceImage');
 const classifyAnotherButton = document.getElementById('classifyBtn');
 
-let rawPredictionData = null;
-
 const urlParams = new URLSearchParams(window.location.search);
 const className = urlParams.get('class');
 const confidence = urlParams.get('confidence');
